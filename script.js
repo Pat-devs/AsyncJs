@@ -132,3 +132,53 @@ let log = function(message) {
 function displayGreetingOnPage(greeting) {
     document.body.innerText += greeting
 }
+
+
+
+
+
+// forEach, map, filter
+
+
+
+// reimplementer forEach uten å bruke foreach
+// bare vanlige loops
+
+
+const items = ["Bok", "Penn", "Notatbok", "Viskelær", "Blyant", "Markør"];
+
+/* items.forEach( function(value) {
+    console.log(value)
+} ) */
+
+// forEach function takes two arguments: an array and a callback-function
+
+function forEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        callback(element)
+    }
+}
+
+forEach(items, function(value) {
+    console.log(value)
+})
+
+// reimplement .map with a function as with forEach
+// map function takes an array and a callback function as arguments, and then runs the callback function for each element, and then returns a new array
+function map(array, callback) {
+    const newArray = []
+
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        newArray.push(callback(element))
+    }
+
+    return newArray
+}
+
+// map an array to uppercase:
+
+//console.log( items.map(function(value) { return value.toUpperCase()}))
+
+console.log(map(items, function(value) { return value.toUpperCase()}))
