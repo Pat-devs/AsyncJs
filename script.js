@@ -82,10 +82,18 @@ function setTimeoutPromise(duration) {
 
 
 
+// .then-method (the first way to handle promises)
+
+setTimeoutPromise(1000).then(function() {
+    // can run async code here
+    console.log("Am i delayed?")
+    
+})
 
 
 
 
+// async await (most modern way to handle promises):
 async function something() {
     // kode
 
