@@ -1,75 +1,40 @@
+// API intro
 
-// Synkron kode:
-/* let x = 1
-console.log(x)
-x++
-console.log(x)
-x++
-console.log(x)
-x++
-console.log(x)
-x++
-console.log(x)
-x++
- */
-/* setTimeout(function() {
-    
-}, 1000) */
+// Makes a request to a url, and returns a promise
+async function handleFetch() {
+    // 1. Make a request
+    const request = await fetch("https://pokeapi.co/api/v2/")
+    // 2. if #1 went well, get (download) the data
+    const data = await request.json()
 
 
-/*
-Hi (vent.. 1sek)
-How are you (vent 1sec)
-Today?
+    return data
 
-*/
-let delay = 1000
-/* 
-// callback hell example:
-setTimeout(() => {
-    // forsinket kode:
-    console.log("Hi")
-    setTimeout(() => {
-        // forsinket kode:
-        console.log("How are you")
-        setTimeout(() => {
-            // forsinket kode:
-            console.log("Today?")
-            setTimeout(() => {
-                // forsinket kode:
-                console.log("Hi")
-                setTimeout(() => {
-                    // forsinket kode:
-                    console.log("How are you")
-                    setTimeout(() => {
-                        // forsinket kode:
-                        console.log("Today?")
-                    }, delay)
-                }, delay)
-            }, delay)
-        }, delay)
-    }, delay)
-}, delay)
-
- */
-
-
-
-/* for (let index = 0; index < 5; index++) {
-    setTimeout(() => {
-        // forsinket kode:
-        console.log("Hi" + index)
-    }, 1000)
-    
-} */
-
-
-// set timeout promise handler function:
-function setTimeoutPromise(duration) {
-    return new Promise((resolve) => setTimeout(resolve, duration))
+    //console.log(data2)
 }
 
 
+/* console.log(1)
+console.log(2)
+console.log(handleFetch())
+console.log(3)
+console.log(4)
+console.log(5) */
+// get the div element
+const containerEl = document.querySelector("div")
+
+
+async function displayPokemons(pokemonListPromise) {
+    let pokemonList = await pokemonListPromise
+
+    // convert an object to an array (so that we can loop through it):
+    const pokemonListArray = Object.entries(pokemonList)
+
+    for (const pokemonLink of pokemonListArray) {
+        containerEl.innerHTML += `<a href="${pokemonLink[1]}">${pokemonLink[0]}</a><br>`
+    }
+}
+//displayPokemons(handleFetch())
 
 
 
@@ -78,30 +43,92 @@ function setTimeoutPromise(duration) {
 
 
 
+/// alt løsning:
 
 
+// Makes a request to a url, and returns a promise
+async function handleFetchToo(callback) {
+    // 1. Make a request
+    const request = await fetch("https://pokeapi.co/api/v2/")
+    // 2. if #1 went well, get (download) the data
+    const data = await request.json()
 
 
-// .then-method (the first way to handle promises)
+    callback(data)
 
-setTimeoutPromise(1000).then(function() {
-    // can run async code here
-    console.log("Am i delayed?")
-    
-})
-
-
-
-
-// async await (most modern way to handle promises):
-async function something() {
-    // kode
-
-    console.log("Hi")
-    await setTimeoutPromise(1000)
-    console.log("How are you...")
-    await setTimeoutPromise(1000)
-    console.log("today?")
+    //console.log(data2)
 }
 
-something()
+
+function displayPokemonsToo(pokemonList) {
+
+    // convert an object to an array (so that we can loop through it):
+    const pokemonListArray = Object.entries(pokemonList)
+
+    for (const pokemonLink of pokemonListArray) {
+        containerEl.innerHTML += `<a href="${pokemonLink[1]}">${pokemonLink[0]}</a><br>`
+    }
+}
+
+handleFetchToo(displayPokemonsToo)
+
+
+let myVar = 1234
+let myVarToo = "bokstaver.."
+let myVarAlsoToo = [1,5,6136]
+let myVarAlsoTooToo = { name: "Js" }
+let myVarAlsoTooTooToo = new Audio()
+
+let minVar = function() {
+    console.log("Hi")
+}
+
+function minFunksjon() {
+    console.log("Hi")
+}
+
+let minPil = () => { 
+    console.log("Hi")
+}
+
+minFunksjon()
+
+
+// function takes a username, a custom greeting message and an output destination (like console or webpage display function)
+function fancyGreeter(userName, message, output) {
+    let finalMessage = userName + ", " + message
+
+    //console.log(typeof output())
+    output(finalMessage)
+    //return to output
+}
+
+//fancyGreeter("Bob", "how are you?", console.log)
+
+//fancyGreeter("Bob", "how are you?", displayGreetingOnPage)
+
+
+let log = function(message) {
+    console.log(message)   
+}
+
+//log("hi")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function displayGreetingOnPage(greeting) {
+    document.body.innerText += greeting
+}
